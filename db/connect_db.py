@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect("./db/analytics.db")
+con = sqlite3.connect("analytics.db")
 cur = con.cursor()
 # logId, dateId, prodId, catId, fabId
 cur.execute('''
@@ -34,7 +34,7 @@ count = cur.fetchone()[0]
 if count == 0:
     print("Database is empty")
 
-    with open('./data/produits-tous.orig', 'r') as data_file:
+    with open('../data/pointsDeVente-tous', 'r') as data_file:
         for line in data_file:
             parts = line.strip().split()
             if len(parts) == 4:
@@ -49,7 +49,7 @@ count = cur.fetchone()[0]
 if count == 0:
     print("Database is empty")
 
-    with open('./data/pointsDeVente-tous', 'r') as data_file:
+    with open('../data/pointsDeVente-tous', 'r') as data_file:
         for line in data_file:
             parts = line.strip().split()
             if len(parts) == 5:
