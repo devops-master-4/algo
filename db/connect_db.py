@@ -6,7 +6,7 @@ cur = con.cursor()
 cur.execute('''
     CREATE TABLE IF NOT EXISTS products (
         logID INTEGER PRIMARY KEY AUTOINCREMENT,
-        dateID INTEGER,
+        dateID DATE,
         prodID INTEGER,
         catID INTEGER,
         fabID INTEGER
@@ -19,7 +19,7 @@ con.commit()
 cur.execute('''
     CREATE TABLE IF NOT EXISTS categories (
         logID INTEGER PRIMARY KEY AUTOINCREMENT,
-        dateID INTEGER,
+        dateID DATE,
         prodID INTEGER,
         catID INTEGER,
         fabID INTEGER,
@@ -41,6 +41,8 @@ if count == 0:
             parts = line.strip().split()
             if len(parts) == 4:
                 dateID, prodID, catID, fabID = map(int, parts)
+                dateID = str(dateID)
+                dateID = dateID[:4] + '-' + dateID[4:6] + '-' + dateID[6:]
                 products.append((dateID, prodID, catID, fabID))
                 # cur.execute("INSERT INTO products (dateID, prodID, catID, fabID) VALUES (?, ?, ?, ?)",
                 #             (dateID, prodID, catID, fabID))
@@ -62,6 +64,8 @@ if count == 0:
             parts = line.strip().split()
             if len(parts) == 5:
                 dateID, prodID, catID, fabID, magID = map(int, parts)
+                dateID = str(dateID)
+                dateID = dateID[:4] + '-' + dateID[4:6] + '-' + dateID[6:]
                 categories.append((dateID, prodID, catID, fabID, magID))
                 # cur.execute("INSERT INTO categories (dateID, prodID, catID, fabID, magID) VALUES (?, ?, ?, ?, ?)",
                 #             (dateID, prodID, catID, fabID, magID))
